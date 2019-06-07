@@ -1,9 +1,10 @@
 #include <stdio.h>
-#include<syscall.h>
-#include<unistd.h>
-#include<sys/types.h>
+#include <stdint.h>
+#include <syscall.h>
+#include <unistd.h>
+#include <sys/types.h>
 #include <stdlib.h>
-#include<string.h>
+#include <string.h>
 
 const int arr_led[] = {"17","4","18","23","24","25","22","27"};
 
@@ -69,6 +70,9 @@ for (j = 0; i < 8; j++)
 
 /* *********************************************************** */
 //SET DE PINES (NO TERMINADA)
+#define ON 1
+#define OFF 0
+
 FILE * handle_bit;
 int nWritten_bit;
 char *pin22 ="/sys/class/gpio/gpio22/value";
@@ -96,5 +100,49 @@ void main(void)
 	}
 	fclose(handle_bit);
 }
+
+
+*pin0 = "/sys/class/gpio/gpio17/value";
+*pin1 = "/sys/class/gpio/gpio4/value";
+*pin2 = "/sys/class/gpio/gpio18/value";
+*pin3 = "/sys/class/gpio/gpio23/value";
+*pin4 = "/sys/class/gpio/gpio24/value";
+*pin5 = "/sys/class/gpio/gpio25/value";
+*pin6 = "/sys/class/gpio/gpio22/value";
+*pin7 = "/sys/class/gpio/gpio27/value";
+
+int arr_pled[] = {*pin0, *pin1, *pin2, *pin3, *pin4, *pin5, *pin6, *pin7};
+
+typedef struct 			//defino estructura de ON OFF de pines
+{
+	uint8_t pin0 :1;
+	uint8_t pin1 :1;
+	uint8_t pin2 :1;
+	uint8_t pin3 :1;
+	uint8_t pin4 :1;
+	uint8_t pin5 :1;
+	uint8_t pin6 :1;
+	uint8_t pin7 :1; 
+}pin_led_t;
+
+typedef struct
+{
+    uint8_t led_by; // (2 bytes)
+} led_byte_t;
+
+typedef union
+{
+	led_byte_t ledby;
+	led_bit_t ledbi;
+}my_led_t;
+
+my_led_t led_x;
+
+char c;
+c = 10;
+led_x.ledby.led_by = c;
+
+int char2bit(char c);
+switch 
 
 /* *********************************************************** */
