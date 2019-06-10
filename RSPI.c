@@ -156,7 +156,7 @@ int main(void)
 			printf("Device successfully opened\n");
 		}
 
-		if(fputc('1' ,handle_bit)==-1) // Set pin low
+		if(fputc('0' ,handle_bit)==-1) // Set pin low
 		{
 			printf("Clr_Pin: Cannot write to file. Try again later.\n");
 			exit(1);
@@ -166,6 +166,7 @@ int main(void)
 			//printf("Write to file %s successfully done.\n",pin0);
 		}
 		fclose(handle_bit);
+		delay(5000);
 	}
 /* *********************************************************** */
 
